@@ -1,0 +1,144 @@
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+/* Heading ----------------------------*/
+header {
+  background-color: #CB997E;
+  padding: 20px 20px; /* vertical + horizontal space */
+}
+.heading {
+  display: inline-block;
+  gap: 15px;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  max-width: 700px;
+}
+
+/* Controls card ----------------------------*/
+.controls {
+  background: #FFBF69;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  padding: 20px 20px; /* vertical + horizontal space */
+}
+
+.control-group {
+  display: inline-block;
+  gap: 15px;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  max-width: 300px;
+}
+
+.control-group label {
+  display: block;
+  margin-bottom: 8px; /* optional spacing */
+}
+
+/* buttons */
+
+/* hide the default file input */
+.upload input[type="file"] {
+  display: none;
+}
+
+/* styled label looks like a button */
+.btn {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: #9a4f0d;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+.btn:hover {
+  background-color: #9a4f0d;
+}
+
+/* canvas and userimage ----------------------------*/
+.userimage {
+  background-color: #FFE8D6;
+  display: flex;
+  gap: 2rem; /* space between columns */
+  align-items: flex-start;
+  padding: 20px 20px; /* vertical + horizontal space */
+}
+
+canvas {
+  max-width: 40%;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+/* user naming ----------------------------*/
+
+.colournaming {
+  background-color: #FFE8D6;
+  padding: 20px 20px; /* vertical + horizontal space */
+}
+
+.color-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  vertical-align: middle;
+  border: 1px solid #000;
+  background-color: attr(data-hex);
+}
+
+/* fallback for browsers that don't support attr() colors */
+.color-swatch {
+  background-color: var(--swatch-color);
+}
+
+.hex-label {
+  font-family: monospace;
+  margin-right: 4px;
+}
+
+/* pattern output ----------------------------*/
+.patternOutput {
+  background-color: #FFE8D6;
+  padding: 20px 20px; /* vertical + horizontal space */
+}
+
+/* row descriptions ----------------------------*/
+.row-label {
+  color: #2b6cb0; /* blue-ish */
+  font-weight: 600;
+}
+
+.num {
+  color: #d97706; /* orange-ish */
+  font-weight: 600;
+}
+
+.red {
+  color: #d90606; /* red */
+  font-weight: 600;
+}
+
+/* misc ----------------------------*/
+
+.instr {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #3b2f2f; /* dark, readable, not pure black */
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.rszimage {
+  display: inline;
+  max-width: 700px; /* Image will not exceed its container's width */
+    height: auto;    /* Maintains aspect ratio as the width changes */
+    vertical-align: middle;
+    margin-left: 30px;
+}

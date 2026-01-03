@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pixel Pattern Starter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="heading">
+        <h1>Pixel-to-Pattern</h1>
+        <p class="instr">
+          welcome to pixel-to-pattern! simply upload an image with the desired
+          number of columns and rows for a pattern!
+        </p>
+        <p>(horizontal and c2c supported)</p>
+      </div>
+      <div class="heading">
+        <img
+          src="images/patternex2.png"
+          alt="cannot load right now"
+          class="rszimage" 
+        />
+      </div>
+    </header>
+
+    <!-- Controls -->
+    <section class="controls">
+      <div class="control-group upload">
+        <input type="file" id="imageInput" accept="image/*" />
+        <label for="imageInput" class="btn">Upload Image</label>
+        <p id="fileName"></p>
+      </div>
+
+      <div class="control-group">
+        <label class="instr">
+          Rows
+          <input type="number" id="rowsInput" value="4" />
+        </label>
+
+        <label class="instr">
+          Columns
+          <input type="number" id="colsInput" value="4" />
+        </label>
+      </div>
+
+      <div class="control-group">
+        <label class="instr" for="toleranceSlider">
+          Color Tolerance: <span id="toleranceValue">20</span>
+        </label>
+        <input
+          type="range"
+          id="toleranceSlider"
+          min="0"
+          max="100"
+          value="20"
+          step="0.5"
+        />
+      </div>
+
+      <div class="control-group">
+        <button id="processBtn" class="btn">Generate</button>
+      </div>
+
+      <div class="control-group">
+        <img
+          src="images/tolerance_example.png"
+          alt="cannot load right now"
+          class="rszimage"
+        />
+      </div>
+      <p>*higher tolerance will lead to less colours in the image</p>
+    </section>
+
+    <!-- user's image & pixelated image -->
+    <section class="userimage">
+      <!-- userimage: canvas -->
+      <div>
+        <h2 class="instr">Uploaded Image</h2>
+        <pre id="status"></pre>
+        <canvas id="canvas" style="display: none"></canvas>
+      </div>
+
+      <!-- pixelated preview image: previewCanvas -->
+      <div>
+        <h3 class="instr">Pixelated Image</h3>
+        <p>right click to copy/download</p>
+        <canvas id="previewCanvas"></canvas>
+      </div>
+    </section>
+
+    <!-- user naming colours -->
+    <section class="colournaming">
+      <p class="instr">Name your colours (to show up in pattern):</p>
+      <div id="colorNamesContainer"></div>
+    </section>
+
+    <!-- generating pattern controls -->
+    <section class="controls">
+      <button id="generateFRSBtn" class="btn" style="display: none">
+        Generate Single Crochet Pattern
+      </button>
+
+      <button id="generatec2cBtn" class="btn" style="display: none">
+        Generate c2c Pattern
+      </button>
+      <p>
+        the single crochet pattern starts on the bottom left corner, alternating
+        as it travels upwards (row 1 is the bottom row)
+      </p>
+      <p>
+        the c2c pattern starts on the bottom right going downwards, row 2
+        travels upwards, and so on following the image here
+      </p>
+    </section>
+
+    <!-- pattern output -->
+    <section class="patternOutput">
+      <h4 class="instr">Pattern Output</h4>
+      <pre id="patternOutput"></pre>
+
+      <p>some notes: left hand can be achieved by just flipping the image</p>
+    </section>
+
+    <!-- script -->
+    <script src="script.js"></script>
+  </body>
+</html>
