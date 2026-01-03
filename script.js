@@ -414,28 +414,52 @@ function generatec2c(pixelColorsHex, detectedHexColors, colorNamesMap = {}) {
 }
 
 // helper to draw preview of the pixel art
-function drawUniformPreview(pixelColorsHex, rows, cols, scale = 10) {
+function getContrastLineColor(hex) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+
+  // perceived luminance
+  const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+  return luminance > 140 ? "rgba(0,0,0,0.35)" : "rgba(255,255,255,0.35)";
+}
+
+
+function drawUniformPreview(pixelColorsHex, rows, cols) {
   const previewCanvas = document.getElementById("previewCanvas");
   const canvas = document.getElementById("canvas");
   const pctx = previewCanvas.getContext("2d");
 
-  // Match preview size to the user image canvas
-  const targetWidth = canvas.width;
-  const targetHeight = canvas.height;
+  previewCanvas.width = canvas.width;
+  previewCanvas.height = canvas.height;
 
-  previewCanvas.width = targetWidth;
-  previewCanvas.height = targetHeight;
+  const cellWidth = previewCanvas.width / cols;
+  const cellHeight = previewCanvas.height / rows;
 
-  const cellWidth = targetWidth / cols;
-  const cellHeight = targetHeight / rows;
+  pctx.lineWidth = 0.4; // tiny tiny
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      pctx.fillStyle = pixelColorsHex[r][c];
-      pctx.fillRect(c * cellWidth, r * cellHeight, cellWidth, cellHeight);
+      const x = c * cellWidth;
+      const y = r * cellHeight;
+      const color = pixelColorsHex[r][c];
+
+      // fill pixel
+      pctx.fillStyle = color;
+      pctx.fillRect(x, y, cellWidth, cellHeight);
+
+      // subtle separator
+      pctx.strokeStyle = getContrastLineColor(color);
+      pctx.strokeRect(
+        x + 0.2,
+        y + 0.2,
+        cellWidth - 0.4,
+        cellHeight - 0.4
+      );
     }
   }
 }
+
 
 // helper for mapping hex to colour names
 function getColorNamesMap() {
