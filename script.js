@@ -23,7 +23,7 @@ imageInput.addEventListener("change", () => {
   if (imageInput.files.length > 0) {
     fileNameEl.textContent = `Uploaded: ${imageInput.files[0].name}`;
   } else {
-    fileNameEl.textContent = "";
+    fileNameEl.textContent = "No image selected yet";
   }
 });
 
@@ -192,7 +192,6 @@ processBtn.addEventListener("click", () => {
 
       label.appendChild(swatch);
       label.appendChild(hexText);
-      label.appendChild(document.createTextNode(": "));
       label.appendChild(input);
 
       colorNamesContainer.appendChild(label);

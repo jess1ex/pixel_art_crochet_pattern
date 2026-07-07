@@ -2,129 +2,154 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Pixel Pattern Starter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pixel-to-Pattern</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <!-- Header -->
-    <header>
-      <div class="heading">
-        <h1>Pixel-to-Pattern</h1>
-        <p class="instr">
-          welcome to pixel-to-pattern! simply upload an image with the desired
-          number of columns and rows for a pattern!
-        </p>
-        <p>(horizontal and c2c supported)</p>
-      </div>
-      <div class="heading">
-        <img
-          src="images/patternex2.png"
-          alt="cannot load right now"
-          class="rszimage" 
-        />
-      </div>
-    </header>
+    <main class="app-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Crochet chart maker</p>
+          <h1>Pixel-to-Pattern</h1>
+          <p class="lede">
+            Upload an image, choose a grid size, simplify the colors, and turn
+            the result into a single crochet or C2C written pattern.
+          </p>
+        </div>
+        <figure class="hero-media">
+          <img
+            src="images/patternex2.png"
+            alt="Example pixel crochet pattern"
+            class="rszimage"
+          />
+        </figure>
+      </header>
 
-    <!-- Controls -->
-    <section class="controls">
-      <div class="control-group upload">
-        <input type="file" id="imageInput" accept="image/*" />
-        <label for="imageInput" class="btn">Upload Image</label>
-        <p id="fileName"></p>
-      </div>
+      <section class="tool-grid" aria-label="Pattern generator controls">
+        <div class="panel controls">
+          <div class="section-heading">
+            <p class="eyebrow">Step 1</p>
+            <h2>Set up your chart</h2>
+          </div>
 
-      <div class="control-group">
-        <label class="instr">
-          Rows
-          <input type="number" id="rowsInput" value="4" />
-        </label>
+          <div class="control-stack">
+            <div class="upload control-group">
+              <input type="file" id="imageInput" accept="image/*" />
+              <label for="imageInput" class="btn primary-btn">Upload Image</label>
+              <p id="fileName" class="file-name">No image selected yet</p>
+            </div>
 
-        <label class="instr">
-          Columns
-          <input type="number" id="colsInput" value="4" />
-        </label>
-      </div>
+            <div class="number-grid control-group">
+              <label>
+                <span>Rows</span>
+                <input type="number" id="rowsInput" value="4" min="1" />
+              </label>
 
-      <div class="control-group">
-        <label class="instr" for="toleranceSlider">
-          Color Tolerance: <span id="toleranceValue">20</span>
-        </label>
-        <input
-          type="range"
-          id="toleranceSlider"
-          min="0"
-          max="100"
-          value="20"
-          step="0.5"
-        />
-      </div>
+              <label>
+                <span>Columns</span>
+                <input type="number" id="colsInput" value="4" min="1" />
+              </label>
+            </div>
 
-      <div class="control-group">
-        <button id="processBtn" class="btn">Generate</button>
-      </div>
+            <div class="slider-group control-group">
+              <label for="toleranceSlider">
+                <span>Color tolerance</span>
+                <strong id="toleranceValue">20</strong>
+              </label>
+              <input
+                type="range"
+                id="toleranceSlider"
+                min="0"
+                max="100"
+                value="20"
+                step="0.5"
+              />
+              <p class="hint">Higher tolerance groups more colors together.</p>
+            </div>
 
-      <div class="control-group">
-        <img
-          src="images/tolerance_example.png"
-          alt="cannot load right now"
-          class="rszimage"
-        />
-      </div>
-      <p>*higher tolerance will lead to less colours in the image</p>
-    </section>
+            <button id="processBtn" class="btn primary-btn">Generate Preview</button>
+          </div>
+        </div>
 
-    <!-- user's image & pixelated image -->
-    <section class="userimage">
-      <!-- userimage: canvas -->
-      <div>
-        <h2 class="instr">Uploaded Image</h2>
-        <pre id="status"></pre>
-        <canvas id="canvas" style="display: none"></canvas>
-      </div>
+        <figure class="panel reference-card">
+          <img
+            src="images/tolerance_example.png"
+            alt="Color tolerance comparison example"
+            class="rszimage"
+          />
+          <figcaption>
+            Use tolerance to control how many yarn colors the chart keeps.
+          </figcaption>
+        </figure>
+      </section>
 
-      <!-- pixelated preview image: previewCanvas -->
-      <div>
-        <h3 class="instr">Pixelated Image</h3>
-        <p>right click to copy/download</p>
-        <canvas id="previewCanvas"></canvas>
-      </div>
-    </section>
+      <section class="preview-grid">
+        <div class="panel preview-panel">
+          <div class="section-heading">
+            <p class="eyebrow">Source</p>
+            <h2>Uploaded Image</h2>
+          </div>
+          <pre id="status" class="status"></pre>
+          <canvas id="canvas"></canvas>
+        </div>
 
-    <!-- user naming colours -->
-    <section class="colournaming">
-      <p class="instr">Name your colours (to show up in pattern):</p>
-      <div id="colorNamesContainer"></div>
-    </section>
+        <div class="panel preview-panel">
+          <div class="section-heading">
+            <p class="eyebrow">Preview</p>
+            <h2>Pixelated Image</h2>
+          </div>
+          <p class="hint">Right-click the preview to copy or download it.</p>
+          <canvas id="previewCanvas"></canvas>
+        </div>
+      </section>
 
-    <!-- generating pattern controls -->
-    <section class="controls">
-      <button id="generateFRSBtn" class="btn" style="display: none">
-        Generate Single Crochet Pattern
-      </button>
+      <section class="panel colournaming">
+        <div class="section-heading">
+          <p class="eyebrow">Step 2</p>
+          <h2>Name your colors</h2>
+        </div>
+        <p class="hint">These names will appear in the generated pattern.</p>
+        <div id="colorNamesContainer" class="color-list"></div>
+      </section>
 
-      <button id="generatec2cBtn" class="btn" style="display: none">
-        Generate c2c Pattern
-      </button>
-      <p>
-        the single crochet pattern starts on the bottom left corner, alternating
-        as it travels upwards (row 1 is the bottom row)
-      </p>
-      <p>
-        the c2c pattern starts on the bottom right going downwards, row 2
-        travels upwards, and so on following the image here
-      </p>
-    </section>
+      <section class="panel pattern-controls">
+        <div class="section-heading">
+          <p class="eyebrow">Step 3</p>
+          <h2>Create the pattern</h2>
+        </div>
+        <div class="button-row">
+          <button id="generateFRSBtn" class="btn" style="display: none">
+            Generate Single Crochet Pattern
+          </button>
 
-    <!-- pattern output -->
-    <section class="patternOutput">
-      <h4 class="instr">Pattern Output</h4>
-      <pre id="patternOutput"></pre>
+          <button id="generatec2cBtn" class="btn" style="display: none">
+            Generate C2C Pattern
+          </button>
+        </div>
+        <div class="notes-grid">
+          <p>
+            Single crochet starts at the bottom left and alternates direction as
+            it travels upward.
+          </p>
+          <p>
+            C2C starts at the bottom right, then follows diagonal rows upward and
+            downward.
+          </p>
+        </div>
+      </section>
 
-      <p>some notes: left hand can be achieved by just flipping the image</p>
-    </section>
+      <section class="panel patternOutput">
+        <div class="section-heading">
+          <p class="eyebrow">Output</p>
+          <h2>Pattern</h2>
+        </div>
+        <pre id="patternOutput"></pre>
+        <p class="hint">For left-handed charts, flip the image before uploading.</p>
+      </section>
+    </main>
 
-    <!-- script -->
     <script src="script.js"></script>
   </body>
 </html>
