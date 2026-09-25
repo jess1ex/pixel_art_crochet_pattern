@@ -1,46 +1,47 @@
-**Pixel Art Crochet Pattern
-**
+# Pixel-to-Pattern
 
-Pixel Art Crochet Pattern is a simple web-based tool that converts images into pixel grids and written crochet patterns. It’s designed for crocheters who prefer row-by-row written instructions instead of charts.
+A web app that turns uploaded images into pixel crochet patterns.
 
-**Features
-**
-- Upload any image and convert it into pixel art
-- Automatically generate written crochet instructions (row by row)
-- Customizable grid size (rows & columns)
-- Color mapping with hex values
-- Live preview of the pixelated pattern
-- Export-friendly output (easy to copy or print)
+[Live Demo](https://jess1ex.github.io/pixel_art_crochet_pattern/)
 
-**Use Cases
-**
-- Pixel crochet
-- Tapestry crochet
-- C2C (corner-to-corner) planning
-- Any crochet project based on grids or colorwork
+## Overview
 
-**Website Link
-**
-https://jess1ex.github.io/pixel_art_crochet_pattern/
+Pixel-to-Pattern helps crocheters convert an image into a simplified pixel grid
+and written pattern instructions. Users can control the grid size, adjust color
+tolerance, name detected colors, and generate written instructions for single
+crochet or C2C projects.
 
-**Built With
-**
+## Features
+
+- Upload an image from your device
+- Choose custom row and column counts
+- Adjust color tolerance to simplify the palette
+- Preview the generated pixel chart
+- Name detected colors for readable pattern output
+- Generate single crochet and C2C instructions
+
+## Tech Stack
+
 - HTML
 - CSS
 - JavaScript
 - Canvas API
 
-**How It Works
-**
-- Upload an image
-- Choose the number of rows and columns
-- Preview the pixelated image
-- Copy the generated written pattern
+## Run Locally
 
-**Project Status
-**
-This project is actively being improved. Ideas, issues, and suggestions are welcome.
+Open `index.html` in a browser.
 
-**License
-**
-MIT License
+For a local server, run:
+
+    python3 -m http.server
+
+Then open:
+
+    http://localhost:8000
+
+## Project Highlights
+
+- Built image-to-grid conversion logic with JavaScript
+- Used the Canvas API to render pixel previews
+- Created a responsive dark themed interface
+- Converted visual color data into structured crochet instructions
